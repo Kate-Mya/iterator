@@ -9,13 +9,12 @@ private:
     unsigned int Count;
     unsigned int Cursor;
 public:
-    IteratorEXT(EXT* fsItem) :Iterator(fsItem->ClusterCount()) {
-        ext = fsItem;
-        Count = ext->ClusterCount();
-        Cursor = 0;
-    }
-    void First() { Cursor = 0; }
-    void Next() { Cursor++; }
-    bool IsDone() const { return (Cursor >= Count); }
+    IteratorEXT(EXT* fsItem) : ext(fsItem), Count(fsItem->ClusterCount()), Cursor(0) {}
+
+    void First() override { Cursor = 0; }
+
+    void Next() override { Cursor++; }
+
+    bool IsDone() const override { return (Cursor >= Count); }
     MyCluster GetCurrent();
 };
